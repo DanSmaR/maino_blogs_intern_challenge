@@ -4,6 +4,13 @@
 ARG RUBY_VERSION=3.2.0
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
 
+RUN apt-get update && apt-get install -y build-essential
+# Install Rails gem
+RUN gem install rails
+
+# Add gem executables to the PATH
+ENV PATH /usr/local/bundle/bin:$PATH
+
 # Rails app lives here
 WORKDIR /rails
 
