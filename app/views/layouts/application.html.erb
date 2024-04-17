@@ -13,8 +13,20 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <main class="container p-5 mt-5">
+      <div id="flash-msgs mx-auto">
+        <% if alert %>
+          <div class="alert alert-warning text-center fw-bold" role="alert">
+            <%= alert %>
+          </div>
+        <% end %>
+        <% if notice %>
+          <div class="alert bg-success-subtle text-center fw-bold" role="alert">
+            <%= notice %>
+          </div>
+        <% end %>
+      </div>
+      <%= yield %>
+    </main>
   </body>
 </html>

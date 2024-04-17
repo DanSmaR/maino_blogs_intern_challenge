@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+ .post-container {
+     width: max-content;
+     text-align: center;
+ }

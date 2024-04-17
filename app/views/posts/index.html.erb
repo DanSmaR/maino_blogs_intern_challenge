@@ -1,11 +1,11 @@
 <div class="mt-3">
   <h1><%= Post.model_name.human(count: @posts.size) %></h1>
 
-  <% @posts.each do |post| %>
-    <article class="post">
+  <section class="post-container">
+    <% @posts.each do |post| %>
       <%= link_to post_path(post) do %>
         <%= render "posts_index", post: post %>
       <% end %>
-    </article>
-  <% end %>
+    <% end %>
+  </section>
 </div>
