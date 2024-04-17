@@ -1,0 +1,7 @@
+<% if @post.errors.present? %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% @post.errors.full %>
+    </ul>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+<%= form_with model: @post, class: 'mt-3' do |f| %>
+  <p class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </p>
+
+  <p class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control' %>
+  </p>
+<% end %>
