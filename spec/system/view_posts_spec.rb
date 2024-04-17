@@ -28,7 +28,7 @@ describe 'User views posts' do
 
       3.times do |i|
         expect(page).to have_content("Publicação #{9 - i}")
-        expect(page).to have_content("Esse é o conteúdo incrível da minha publicação #{9 - i}")
+        expect(page).to have_content("Esse é o conteúdo incrível da minha publicação #{9 - i}".truncate(30))
       end
 
       6.times do |i|
@@ -78,7 +78,7 @@ describe 'User views posts' do
 
       3.times do |i|
         expect(page).to have_content("Publicação #{6 - i}")
-        expect(page).to have_content("Esse é o conteúdo incrível da minha publicação #{6 - i}")
+        expect(page).to have_content("Esse é o conteúdo incrível da minha publicação #{6 - i}".truncate(30))
       end
 
       3.times do |i|
@@ -131,7 +131,7 @@ describe 'User views posts' do
 
       3.times do |i|
         expect(page).to have_content("Publicação #{3 - i}")
-        expect(page).to have_content("Esse é o conteúdo incrível da minha publicação #{3 - i}")
+        expect(page).to have_content("Esse é o conteúdo incrível da minha publicação #{3 - i}".truncate(30))
       end
 
       3.times do |i|
