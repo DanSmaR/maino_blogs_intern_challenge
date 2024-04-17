@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.order(created_at: :desc)
+    @pagy, @posts = pagy(@posts, items: 3)
   end
 
   def show
