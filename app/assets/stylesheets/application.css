@@ -13,7 +13,17 @@
  *= require_tree .
  *= require_self
  */
+
+ .container {
+     text-align: center;
+ }
  .post-container {
      width: max-content;
      text-align: center;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+ .pagination {
+     justify-content: center;
  }
