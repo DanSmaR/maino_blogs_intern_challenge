@@ -17,13 +17,32 @@
  .container {
      text-align: center;
  }
- .post-container {
-     width: max-content;
-     text-align: center;
-     margin-left: auto;
-     margin-right: auto;
+
+.form-container {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-check {
+    text-align: left;
+}
+
+.form-check-label {
+    padding-left: 1rem;
+}
+
+.post-container {
+    width: max-content;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
  }
 
- .pagination {
-     justify-content: center;
- }
+.pagination {
+    justify-content: center;
+}
+
+.nav-login {
+    margin-left: auto;
+}

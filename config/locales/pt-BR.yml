@@ -1,0 +1,10 @@
+pt-BR:
+  sign_up: 'Criar Nova Conta'
+  log_in: 'Entrar'
+  log_out: 'Sair'
+  login_required: 'Você não está logado'
+  true: 'Sim'
+  false: 'Não'
+  characters_minimum:
+    one: "%{count} caractere mínimo"
+    other: "%{count} caracteres mínimos"
