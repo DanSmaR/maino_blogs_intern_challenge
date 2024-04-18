@@ -8,3 +8,7 @@ pt-BR:
       post:
         title: Título
         content: Conteúdo
+  posts:
+    show:
+      details_of: Detalhes da
+      published_by: Publicado por

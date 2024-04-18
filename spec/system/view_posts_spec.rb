@@ -14,7 +14,7 @@ describe 'User views posts' do
         post_author1.posts.create!(
           title: "Publicação #{i + 1}", content: "Esse é o conteúdo incrível da minha publicação #{i + 1}"
         )
-        end
+      end
 
       4.times do |i|
         post_author2.posts.create!(
