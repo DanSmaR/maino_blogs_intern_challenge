@@ -1,0 +1,5 @@
+<article>
+  <h1><%= t('.edit') %> <%= Post.model_name.human %></h1>
+  <%= render 'errors' %>
+  <%= render 'form', is_new: false %>
+</article>

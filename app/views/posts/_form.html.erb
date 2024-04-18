@@ -11,7 +11,8 @@
     </p>
 
     <p class="action">
-      <%= f.submit t('posts.new.create'), class: 'btn btn-primary btn-md' %>
+      <% label = is_new ? t('posts.new.create') : t('posts.edit.save') %>
+      <%= f.submit label, class: 'btn btn-primary btn-md' %>
     </p>
   <% end %>
 </div>

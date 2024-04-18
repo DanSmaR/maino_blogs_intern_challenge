@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: %w[new create]
+  before_action :authenticate_user!, only: %w[new create edit update]
+  before_action :get_post, only: %w[edit update]
 
   def index
     @posts = Post.all.order(created_at: :desc)
@@ -24,9 +25,26 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    # post is set in get_post method
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: t('.success')
+    else
+      flash.now[:alert] = t('.error')
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
   private
 
   def post_params
     params.require(:post).permit(:title, :content)
+  end
+
+  def get_post
+    @post = current_user.posts.find(params[:id])
   end
 end
