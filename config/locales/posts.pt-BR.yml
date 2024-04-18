@@ -12,9 +12,16 @@ pt-BR:
     show:
       details_of: Detalhes da
       published_by: Publicado por
+      edit_link: Editar
     new:
       new: Nova
       create: Criar
     create:
       success: Publicação criada com sucesso!
       error: Não foi possível criar sua publicação
+    edit:
+      edit: Editar
+      save: Salvar
+    update:
+      success: Publicação editada com sucesso!
+      error: Não foi possível editar sua publicação

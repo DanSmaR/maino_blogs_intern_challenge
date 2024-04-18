@@ -1,5 +1,5 @@
 <article>
   <h1><%= t('.new') %> <%= Post.model_name.human %></h1>
   <%= render 'errors' %>
-  <%= render 'form' %>
+  <%= render 'form', is_new: true %>
 </article>
