@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %w[new create edit update]
-  before_action :get_post, only: %w[edit update]
+  before_action :get_post, only: %w[edit update destroy]
 
   def index
     @posts = Post.all.order(created_at: :desc)
@@ -36,6 +36,11 @@ class PostsController < ApplicationController
       flash.now[:alert] = t('.error')
       render 'edit', status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to root_path, notice: t('.success')
   end
 
   private

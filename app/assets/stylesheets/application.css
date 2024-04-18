@@ -47,6 +47,11 @@
     margin-right: auto;
  }
 
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+}
+
 .pagination {
     justify-content: center;
 }

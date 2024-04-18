@@ -13,6 +13,8 @@ pt-BR:
       details_of: Detalhes da
       published_by: Publicado por
       edit_link: Editar
+      destroy_btn: Remover
+      sure: Você tem certeza?
     new:
       new: Nova
       create: Criar
@@ -25,3 +27,5 @@ pt-BR:
     update:
       success: Publicação editada com sucesso!
       error: Não foi possível editar sua publicação
+    destroy:
+      success: Publicação removida com sucesso!
