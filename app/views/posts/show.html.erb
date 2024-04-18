@@ -6,6 +6,7 @@
     <% if user_signed_in? && current_user.posts.include?(@post) %>
       <div class="post-actions">
         <%= link_to t('.edit_link'), edit_post_path(@post), class: "btn btn-secondary mt-3" %>
+        <%= button_to t('.destroy_btn'), post_path(@post), method: :delete, data: {turbo_confirm: t('.sure')}, class: "btn btn-danger mt-3" %>
       </div>
     <% end %>
   </section>
