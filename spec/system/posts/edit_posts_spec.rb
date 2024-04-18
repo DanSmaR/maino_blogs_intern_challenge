@@ -57,5 +57,27 @@ describe 'User edits post' do
 
       expect(page).to have_current_path new_user_session_path
     end
+
+    it 'does not see the edit link in show page' do
+      user = User.create!(name: 'Maria', email: 'maria@email.com', password: 123456)
+      post = user.posts.create!(title: 'Título da Publicação', content: 'Conteúdo da Publicação')
+
+      visit post_path(post)
+
+      expect(page).to_not have_link 'Editar'
+    end
+  end
+
+  context 'when logged in as other user' do
+    it 'cannot see the edit link' do
+      user = User.create!(name: 'Maria', email: 'maria@email.com', password: 123456)
+      post = user.posts.create!(title: 'Título da Publicação', content: 'Conteúdo da Publicação')
+      other_user = User.create!(name: 'João', email: 'joao@email.com', password: 123456)
+
+      login_as other_user
+      visit post_path(post)
+
+      expect(page).to_not have_link 'Editar'
+    end
   end
 end

@@ -3,8 +3,10 @@
   <h3><%= t('.published_by') %> <%= @post.user.name %></h3>
   <section class="post-container" aria-description="posts">
     <%= render @post, is_truncated: false %>
-    <div class="post-actions">
-      <%= link_to t('.edit_link'), edit_post_path(@post), class: "btn btn-secondary mt-3" %>
-    </div>
+    <% if user_signed_in? && current_user.posts.include?(@post) %>
+      <div class="post-actions">
+        <%= link_to t('.edit_link'), edit_post_path(@post), class: "btn btn-secondary mt-3" %>
+      </div>
+    <% end %>
   </section>
 </article>
