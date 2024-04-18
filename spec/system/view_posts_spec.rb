@@ -37,7 +37,7 @@ describe 'User views posts' do
       end
 
       expect(page).to have_ordered_text("Publicação 9", "Publicação 8", "Publicação 7")
-      within "nav" do
+      within ".pagination nav" do
         expect(page).to_not have_link("<")
         expect(page).to have_content("<")
         expect(page).to_not have_link("1")
@@ -92,7 +92,7 @@ describe 'User views posts' do
       end
 
       expect(page).to have_ordered_text("Publicação 6", "Publicação 5", "Publicação 4")
-      within "nav" do
+      within ".pagination nav" do
         expect(page).to have_link("<")
         expect(page).to have_link("1")
         expect(page).to_not have_link("2")
@@ -145,7 +145,7 @@ describe 'User views posts' do
       end
 
       expect(page).to have_ordered_text("Publicação 3", "Publicação 2", "Publicação 1")
-      within "nav" do
+      within ".pagination nav" do
         expect(page).to have_link("<")
         expect(page).to have_link("1")
         expect(page).to have_link("2")
