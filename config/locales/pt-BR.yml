@@ -8,3 +8,4 @@ pt-BR:
   characters_minimum:
     one: "%{count} caractere mínimo"
     other: "%{count} caracteres mínimos"
+  create_post: Criar Publicação

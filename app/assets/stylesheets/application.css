@@ -18,6 +18,14 @@
      text-align: center;
  }
 
+.field_with_errors {
+    display: initial;
+}
+
+.text-danger ul {
+    list-style-type: none;
+}
+
 .form-container {
     max-width: 600px;
     margin-left: auto;

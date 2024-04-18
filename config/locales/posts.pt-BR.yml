@@ -12,3 +12,9 @@ pt-BR:
     show:
       details_of: Detalhes da
       published_by: Publicado por
+    new:
+      new: Nova
+      create: Criar
+    create:
+      success: Publicação criada com sucesso!
+      error: Não foi possível criar sua publicação
