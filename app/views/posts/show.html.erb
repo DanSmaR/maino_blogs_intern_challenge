@@ -1,2 +1,7 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<article class="mt-3">
+  <h1><%= t('.details_of') %> <%= Post.model_name.human %></h1>
+  <h3><%= t('.published_by') %> <%= @post.user.name %></h3>
+  <section class="post-container" aria-description="posts">
+    <%= render @post, is_truncated: false %>
+  </section>
+</article>
