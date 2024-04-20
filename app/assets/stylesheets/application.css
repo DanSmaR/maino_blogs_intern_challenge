@@ -14,9 +14,17 @@
  *= require_self
  */
 
- .container {
-     text-align: center;
+article {
+    position: relative;
+}
+
+.container {
+    text-align: center;
  }
+
+.card-body {
+    border: 1px solid #EDEDED;
+}
 
 .field_with_errors {
     display: initial;
@@ -40,8 +48,20 @@
     padding-left: 1rem;
 }
 
+.form-comment-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    min-width: 500px;
+    margin: 1% auto 0 auto; /* Only centers horizontally not vertically! */
+    left: 0;
+    right: 0;
+    padding-inline: 15%;
+    background-color: #fff;
+}
+
 .post-container {
-    width: max-content;
+    max-width: 100%;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -58,4 +78,8 @@
 
 .nav-login {
     margin-left: auto;
+}
+
+.marg-bottom {
+    margin-bottom: 5rem;
 }
