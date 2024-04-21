@@ -12,7 +12,7 @@ describe 'User access registration page' do
       fill_in 'Senha', with: '123456'
       fill_in 'Confirme sua senha', with: '123456'
       within 'form' do
-        click_button 'Criar Nova Conta'
+        click_button 'Inscrever-se'
       end
 
       user = User.last
@@ -36,7 +36,7 @@ describe 'User access registration page' do
     fill_in 'Senha', with: ''
     fill_in 'Confirme sua senha', with: ''
     within 'form' do
-      click_button 'Criar Nova Conta'
+      click_button 'Inscrever-se'
     end
 
     expect(page).to have_content 'Não foi possível salvar usuário: 3 erros.'
@@ -52,7 +52,7 @@ describe 'User access registration page' do
     fill_in 'Senha', with: '123'
     fill_in 'Confirme sua senha', with: '123'
     within 'form' do
-      click_button 'Criar Nova Conta'
+      click_button 'Inscrever-se'
     end
 
     expect(page).to have_content 'Não foi possível salvar usuário: 1 erro'
