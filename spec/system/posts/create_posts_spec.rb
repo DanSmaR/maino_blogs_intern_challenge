@@ -18,6 +18,7 @@ describe 'User create post' do
 
       fill_in 'Título', with: title
       fill_in 'Conteúdo', with: content
+      fill_in 'Tags', with: 'ruby, rails'
       click_button 'Criar'
 
       posts = Post.all
@@ -27,6 +28,9 @@ describe 'User create post' do
       expect(page).to have_content('Publicado por Maria')
       expect(page).to have_content(title)
       expect(page).to have_content(content)
+      expect(page).to have_content('Tags:')
+      expect(page).to have_link('#ruby')
+      expect(page).to have_link('#rails')
     end
 
     it 'only with required fields' do
@@ -37,6 +41,7 @@ describe 'User create post' do
 
       fill_in 'Título', with: ''
       fill_in 'Conteúdo', with: ''
+      fill_in 'Tags', with: ''
       click_button 'Criar'
 
       expect(Post.count).to eq 0

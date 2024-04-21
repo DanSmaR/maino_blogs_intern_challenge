@@ -1,8 +1,9 @@
 <article class="marg-bottom mt-3">
   <h1><%= t('.details_of') %> <%= Post.model_name.human %></h1>
   <h3><%= t('.published_by') %> <%= @post.user.name %></h3>
+
   <section class="post-container" aria-description="post">
-    <%= render @post, is_truncated: false %>
+    <%= render @post, is_truncated: false, tags_link: true %>
     <% if user_signed_in? && current_user.posts.include?(@post) %>
       <div class="post-actions">
         <%= link_to t('.edit_link'), edit_post_path(@post), class: "btn btn-secondary mt-3" %>
@@ -10,6 +11,7 @@
       </div>
     <% end %>
   </section>
+
   <section class="comment-container card mt-3 mb-3">
     <h4><% total_posts = @post.comments.count %></h4>
     <p>
@@ -23,6 +25,7 @@
       </div>
     <% end %>
   </section>
+
   <section class="form-comment-container">
     <%= form_with model: [@post, @comment], method: :post do |f|%>
       <p class="input-group mb-3">
