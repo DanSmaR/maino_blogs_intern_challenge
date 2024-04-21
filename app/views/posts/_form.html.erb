@@ -10,6 +10,11 @@
       <%= f.text_area :content, class: "form-control" %>
     </p>
 
+    <p class="mb-3">
+      <%= f.label :tags, class: "form-label" %><br />
+      <%= f.text_field :tags, value: @post.tags.map(&:name).join(','), class: "form-control" %>
+    </p>
+
     <p class="action">
       <% label = is_new ? t('posts.new.create') : t('posts.edit.save') %>
       <%= f.submit label, class: 'btn btn-primary btn-md' %>

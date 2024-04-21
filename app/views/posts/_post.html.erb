@@ -2,5 +2,18 @@
   <div class="card-body">
     <h5 class="card-title"><%= post.title%></h5>
     <p class="card-text"><%= is_truncated ? post.content.truncate(30) : post.content %></p>
+
+    <footer class="card-footer text-body-secondary">
+      <strong>Tags: </strong>
+      <% post.tags.each do |tag| %>
+        <% if tags_link %>
+          <%= link_to tag, class: "card-link" do %>
+            <span class="tag">#<%= tag.name.strip %></span>
+          <% end %>
+        <% else %>
+          <span class="tag">#<%= tag.name.strip %></span>
+       <% end %>
+      <% end %>
+    </footer>
   </div>
 </div>

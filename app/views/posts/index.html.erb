@@ -3,8 +3,8 @@
 
   <section class="post-container" aria-description="posts list">
     <% @posts.each do |post| %>
-      <%= link_to post_path(post) do %>
-        <%= render post, is_truncated: true %>
+      <%= link_to post do %>
+        <%= render post, is_truncated: true, tags_link: false %>
       <% end %>
     <% end %>
   </section>
