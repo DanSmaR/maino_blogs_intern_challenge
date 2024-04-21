@@ -1,0 +1,17 @@
+<article id="<%= dom_id tag %>">
+  <h1>
+    <%= Tag.model_name.human %>: <%= tag.name %>
+  </h1>
+
+  <section class="post-container" aria-description="posts list">
+    <% taggables.each do |taggable| %>
+      <%= link_to post_path(taggable.post) do %>
+        <% render 'posts/post', post: taggable.post, is_truncated: false, tags_link: false %>
+      <% end %>
+    <% end %>
+  </section>
+
+  <section aria-description="posts pagination" class="mt-5 pagination">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </section>
+</article>

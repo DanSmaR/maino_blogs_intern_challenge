@@ -11,15 +11,19 @@ describe 'User views posts' do
       )
 
       5.times do |i|
-        post_author1.posts.create!(
+        post = post_author1.posts.create!(
           title: "Publicação #{i + 1}", content: "Esse é o conteúdo incrível da minha publicação #{i + 1}"
         )
+        post.tags << Tag.find_or_create_by(name: 'ruby')
+        post.tags << Tag.find_or_create_by(name: 'rails')
       end
 
       4.times do |i|
-        post_author2.posts.create!(
+        post = post_author2.posts.create!(
           title: "Publicação #{i + 6}", content: "Esse é o conteúdo incrível da minha publicação #{i + 6}"
         )
+        post.tags << Tag.find_or_create_by(name: 'ruby')
+        post.tags << Tag.find_or_create_by(name: 'rails')
       end
 
       visit root_path
@@ -30,6 +34,7 @@ describe 'User views posts' do
         expect(page).to have_content("Publicação #{9 - i}")
         expect(page).to have_content("Esse é o conteúdo incrível da minha publicação #{9 - i}".truncate(30))
       end
+      expect(page).to have_content('Tags: #ruby #rails', count: 3)
 
       6.times do |i|
         expect(page).to_not have_content("Publicação #{6 - i}")
