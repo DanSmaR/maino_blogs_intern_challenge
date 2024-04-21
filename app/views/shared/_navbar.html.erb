@@ -20,7 +20,10 @@
             <%= link_to t('log_in'), new_user_session_path, class: 'btn btn-primary btn-md mx-3' %>
           </div>
         <%  else %>
-          <%= button_to t('log_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+          <div class="nav-button-control d-flex justify-content-end">
+            <%= link_to t('devise.registrations.edit.title', resource: current_user.name), edit_user_registration_path, class: 'btn btn-secondary btn-md mx-3' %>
+            <%= button_to t('log_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-md mx-3' %>
+          </div>
         <% end %>
       </div>
     </div>

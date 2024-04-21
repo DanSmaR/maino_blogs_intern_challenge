@@ -2,10 +2,11 @@ pt-BR:
   sign_up: 'Criar Nova Conta'
   log_in: 'Entrar'
   log_out: 'Sair'
+  edit_profile: 'Editar Perfil'
   login_required: 'Você não está logado'
   true: 'Sim'
   false: 'Não'
   characters_minimum:
     one: "%{count} caractere mínimo"
     other: "%{count} caracteres mínimos"
-  create_post: Criar Publicação
+  create_post: 'Criar Publicação'

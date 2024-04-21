@@ -77,7 +77,9 @@ describe 'User edits post' do
       login_as other_user
       visit post_path(post)
 
-      expect(page).to_not have_link 'Editar'
+      within '.post-container' do
+        expect(page).to_not have_link 'Editar'
+      end
     end
   end
 end
