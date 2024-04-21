@@ -50,6 +50,9 @@ describe 'User update his profile' do
       updated_user = User.last
 
       expect(page).to have_content 'Não foi possível salvar usuário: 3 erros.'
+      expect(page).to have_content 'E-mail não pode ficar em branco'
+      expect(page).to have_content 'Nome não pode ficar em branco'
+      expect(page).to have_content 'Senha atual não pode ficar em branco'
       expect(updated_user.name).to eq 'Maria'
       expect(updated_user.email).to eq 'maria@email.com'
       within 'header nav' do
