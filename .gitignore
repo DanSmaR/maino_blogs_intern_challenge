@@ -156,3 +156,5 @@ fabric.properties
 /.idea/misc.xml
 /.idea/MainoBlog.iml
 /.idea/dataSources.xml
+/fly.toml
+/config/dockerfile.yml

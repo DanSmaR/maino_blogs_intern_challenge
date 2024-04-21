@@ -66,3 +66,7 @@ end
 gem "devise", "~> 4.9"
 
 gem "pagy", "~> 8.2"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "redis", "~> 5.2"
