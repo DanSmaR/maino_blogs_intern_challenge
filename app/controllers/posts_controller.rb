@@ -17,9 +17,31 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params.except(:tags))
-    associate_tags_to_post(@post, params[:post][:tags])
-    if @post.save
+    unless params[:post].present?
+      @post = current_user.posts.build
+      redirect_to new_post_path, alert: t('.no_file')
+      return
+    end
+
+    if params[:post][:file].present?
+      parsed_content = FileParsingService.new(params[:post][:file]).call
+
+      unless parsed_content
+        @post = current_user.posts.build(post_params.except(:tags, :file))
+        @post.errors.add(:base, t('.invalid_file_format'))
+        flash.now[:alert] = t('.error')
+        render 'new', status: :unprocessable_entity
+        return
+      end
+
+      updated_params = post_params.merge(parsed_content)
+    else
+      updated_params = post_params
+    end
+
+    @post = PostCreationService.new(current_user, updated_params).call
+
+    if @post.persisted?
       redirect_to post_path(@post), notice: t('.success')
     else
       flash.now[:alert] = t('.error')
@@ -32,8 +54,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    associate_tags_to_post(@post, params[:post][:tags])
     if @post.update(post_params.except(:tags))
+      @post.associate_tags(params[:post][:tags])
       redirect_to post_path(@post), notice: t('.success')
     else
       flash.now[:alert] = t('.error')
@@ -48,19 +70,11 @@ class PostsController < ApplicationController
 
   private
 
-  def post_params
-    params.require(:post).permit(:title, :content, :tags)
-  end
-
-  def get_post
-    @post = current_user.posts.find(params[:id])
-  end
-
-  def associate_tags_to_post(post, tags)
-    post.taggables.destroy_all
-    tags = tags.strip.split(',')
-    tags.each do |tag|
-      post.tags << Tag.find_or_create_by(name: tag)
+    def post_params
+      params.require(:post).permit(:title, :content, :tags, :file)
     end
-  end
+
+    def get_post
+      @post = current_user.posts.find(params[:id])
+    end
 end

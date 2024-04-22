@@ -2,4 +2,27 @@
   <h1><%= t('.new') %> <%= Post.model_name.human %></h1>
   <%= render 'errors', post: @post %>
   <%= render 'form', is_new: true, post: @post %>
+
+  <section class="form-container" aria-description="Create Post via File">
+    <h5><%= t('.or_create_post_via_file') %></h5>
+    <%= form_for @post, html: { multipart: true } do |f| %>
+      <p class="input-group">
+        <%= f.file_field :file, accept: 'text/plain', class: 'form-control' %>
+        <%= f.submit t('.send_file'), class: "btn btn-outline-secondary" %>
+      </p>
+    <% end %>
+
+    <div class="text-start">
+      <p>
+        The file must contain the first line as title.
+        The subsequent lines as contents and the last line as tags, comma separated, as shown below:
+      </p>
+      <pre>
+My Post Title
+My content
+in multiple lines.
+ruby, sql, webdev
+      </pre>
+    </div>
+  </section>
 </article>
