@@ -1,10 +1,16 @@
 # Maino Blog
 
-Maino Blog is a web application that allows users to create and share blog posts. It's built with Ruby on Rails and uses PostgreSQL for data storage. The application is designed to be run in a Docker environment, making it easy to set up and run on any system.
+Maino Blog is a web application that allows users to create and share blog posts. It's built with Ruby on Rails and uses 
+PostgreSQL for data storage. The application is designed to be run in a Docker environment, making it easy to set up and 
+run on any system.
+
+See [Pendencies](#pendencies) to know more about the current state of the application.
 
 ## Purpose
 
-The purpose of this application is to provide a platform for users to share their thoughts and ideas in the form of blog posts. Users can create, read, update, and delete posts, providing a full blogging experience. They can comment in a post too.
+The purpose of this application is to provide a platform for users to share their thoughts and ideas in the form of blog 
+posts. Users can create, read, update, and delete posts, providing a full blogging experience. They can comment in a 
+post too.
 
 ## Technologies
 
