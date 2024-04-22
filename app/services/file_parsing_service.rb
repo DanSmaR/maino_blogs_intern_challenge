@@ -4,9 +4,9 @@ class FileParsingService
   end
 
   def call
-    return false unless @uploaded_file.present? && @uploaded_file.content_type == 'text/plain'
+    return false unless @uploaded_file.present?
 
-    file_content = File.open(@uploaded_file.tempfile, "r:UTF-8").read
+    file_content = File.open(@uploaded_file, "r:UTF-8").read
     lines = file_content.split("\n")
 
     title = lines[0]

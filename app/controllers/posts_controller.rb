@@ -24,22 +24,28 @@ class PostsController < ApplicationController
     end
 
     if params[:post][:file].present?
-      parsed_content = FileParsingService.new(params[:post][:file]).call
+      uploaded_file = params[:post][:file]
 
-      unless parsed_content
-        @post = current_user.posts.build(post_params.except(:tags, :file))
-        @post.errors.add(:base, t('.invalid_file_format'))
-        flash.now[:alert] = t('.error')
-        render 'new', status: :unprocessable_entity
+      unless uploaded_file.content_type == 'text/plain'
+        @post = current_user.posts.build
+        redirect_to new_post_path, alert: t('.invalid_file_format')
         return
       end
 
-      updated_params = post_params.merge(parsed_content)
-    else
-      updated_params = post_params
+      file_path = Rails.root.join('app','uploads', uploaded_file.original_filename)
+
+      File.open(file_path, 'wb') do |file|
+        file.write(uploaded_file.read)
+      end
+
+      CreatePostFromFileJob.perform_async(file_path.to_s, current_user.id)
+
+      redirect_to root_path, notice: t('.success_job')
+
+      return
     end
 
-    @post = PostCreationService.new(current_user, updated_params).call
+    @post = PostCreationService.new(current_user, post_params).call
 
     if @post.persisted?
       redirect_to post_path(@post), notice: t('.success')
