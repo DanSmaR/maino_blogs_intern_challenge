@@ -11,5 +11,18 @@
         <%= f.submit t('.send_file'), class: "btn btn-outline-secondary" %>
       </p>
     <% end %>
+
+    <div class="text-start">
+      <p>
+        The file must contain the first line as title.
+        The subsequent lines as contents and the last line as tags, comma separated, as shown below:
+      </p>
+      <pre>
+My Post Title
+My content
+in multiple lines.
+ruby, sql, webdev
+      </pre>
+    </div>
   </section>
 </article>
