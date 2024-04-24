@@ -32,31 +32,14 @@ Maino Blog is built using the following technologies:
 To run the application, you need to have Docker and Docker Compose installed on your machine. Once you have these prerequisites, you can start the application by following these steps:
 - You can get the latest version of [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/).
 
-Certify that you have a postgresql service running on your machine.
-```sh
-sudo systemctl start postgresql
-```
-
-Certify that you have a redis service running on your machine.
-```sh
-sudo systemctl start redis
-```
-
 1. Clone the repository to your local machine.
 2. Navigate to the project root directory in your terminal.
 3. Rename the file `.env.example` to `.env` to set the environment variables.
 4. Run the following commands to prepare the application:
-```sh
-bundle install
-rails db:drop
-rails db:create
-rails db:migrate
-rails db:seed
-```
 
-4. Run the following command to start the application:
+- To run the application with docker-compose, you need to run the following command:
 ```sh
-rails s
+docker-compose up --build
 ```
 
 ## Accessing the App
@@ -68,29 +51,16 @@ deployed in [Fly.io](https://fly.io/)
 
 ## Running the Tests
 
-To run the tests, you need to access the container maino-web. Then, run:
+To run the tests, you need to access the container maino-web, the run the test:
 
 ```sh
+docker exec -it maino-web -bash
 bundle exec rspec
 ```
 
 ## Pendencies
-
-- You can use docker-compose to run the application. But the tests are not passing yet. I'm working on it. They
-only pass when you run the tests in your local machine.
-
-- To run the application with docker-compose, you need to run the following command:
-```sh
-docker-compose up
-```
-Don't forget to stop the local postgresql service before running the docker-compose:
-```sh
-sudo systemctl stop postgresql
-```
-And change the .env file to use the postgresql service in the docker-compose, setting the **POSTGRES_HOST** to `db`
-and **REDIS_URL** to `redis://redis:6379/10` 
-
-- The Job Async is not working in the deployed application, only in local machine. I'm working on it. The files uploaded
-are being processed in the same thread.
+- The Job Async is not working in the deployed application, only in local machine. It is processing the file in sync.
+  In this PR I have modified the logic to use tempfile instead of saving a file in the server in order to read it later 
+  in the job perform method. This could make the deployed app work correctly.
 
 - Improve the tags search and add posts search too.
