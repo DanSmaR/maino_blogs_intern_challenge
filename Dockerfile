@@ -28,8 +28,6 @@ FROM base AS build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config
 
-RUN apt-get update && apt-get install -y firefox-esr
-
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User update his profile' do
   context 'when logged in' do
     it 'successfully' do
-      user = User.create!(name: 'Maria', email: 'dns@email.com', password: 123456)
+      user = User.create!(name: 'Maria', email: 'maria@email.com', password: 123456)
 
       login_as user
       visit root_path
