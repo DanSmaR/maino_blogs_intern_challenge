@@ -19,9 +19,14 @@ pt-BR:
     new:
       new: Nova
       create: Criar
+      send_file: Enviar
+      or_create_post_via_file: Ou crie um post através de um arquivo txt
     create:
       success: Publicação criada com sucesso!
       error: Não foi possível criar sua publicação
+      invalid_file_format: Não foi enviado um arquivo válido.
+      no_file: Arquivo não selecionado
+      success_job: Seu arquivo está sendo processado. Se der tudo certo, seu post será criado
     edit:
       edit: Editar
       save: Salvar

@@ -18,27 +18,56 @@ services:
       timeout: 10s
       retries: 5
     ports:
-      - 5432:5432
+      - '5431:5432'
+    expose:
+      - 5432
+
   app:
     build: .
-    command: "./bin/rails server -b 0.0.0.0"
-    environment:
-      - RAILS_ENV=${RAILS_ENV}
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+    container_name: maino-web
+    env_file:
+      - ./.env
     volumes:
+      - ./app:/rails/app
+      - ./spec:/rails/spec
       - app-storage:/rails/storage
-      - rubygems:/usr/local/bundle
+      - rubygems_app:/usr/local/bundle
     depends_on:
       db:
         condition: service_healthy
     ports:
-      - 3000:3000
+      - '3000:3000'
+    expose:
+      - 3000
+
+  worker:
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile
+    container_name: maino-worker
+    env_file:
+      - ./.env
+    volumes:
+      - rubygems_worker:/usr/local/bundle
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports: [ ]
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: maino-redis
+    restart: 'always'
+    ports:
+      - '6380:6379'
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 10s
+      retries: 3
 
 volumes:
   postgres_data: {}
   app-storage: {}
-  rubygems: {}
+  rubygems_app: {}
+  rubygems_worker: {}

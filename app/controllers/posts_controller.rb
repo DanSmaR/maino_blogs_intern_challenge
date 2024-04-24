@@ -17,9 +17,33 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params.except(:tags))
-    associate_tags_to_post(@post, params[:post][:tags])
-    if @post.save
+    unless params[:post].present?
+      @post = current_user.posts.build
+      redirect_to new_post_path, alert: t('.no_file')
+      return
+    end
+
+    if params[:post][:file].present?
+      uploaded_file = params[:post][:file]
+
+      unless uploaded_file.content_type == 'text/plain'
+        @post = current_user.posts.build
+        redirect_to new_post_path, alert: t('.invalid_file_format')
+        return
+      end
+
+      file_content = uploaded_file.read
+
+      CreatePostFromFileJob.perform_async(file_content, current_user.id)
+
+      redirect_to root_path, notice: t('.success_job')
+
+      return
+    end
+
+    @post = PostCreationService.new(current_user, post_params).call
+
+    if @post.persisted?
       redirect_to post_path(@post), notice: t('.success')
     else
       flash.now[:alert] = t('.error')
@@ -32,8 +56,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    associate_tags_to_post(@post, params[:post][:tags])
     if @post.update(post_params.except(:tags))
+      @post.associate_tags(params[:post][:tags])
       redirect_to post_path(@post), notice: t('.success')
     else
       flash.now[:alert] = t('.error')
@@ -48,19 +72,11 @@ class PostsController < ApplicationController
 
   private
 
-  def post_params
-    params.require(:post).permit(:title, :content, :tags)
-  end
-
-  def get_post
-    @post = current_user.posts.find(params[:id])
-  end
-
-  def associate_tags_to_post(post, tags)
-    post.taggables.destroy_all
-    tags = tags.strip.split(',')
-    tags.each do |tag|
-      post.tags << Tag.find_or_create_by(name: tag)
+    def post_params
+      params.require(:post).permit(:title, :content, :tags, :file)
     end
-  end
+
+    def get_post
+      @post = current_user.posts.find(params[:id])
+    end
 end
