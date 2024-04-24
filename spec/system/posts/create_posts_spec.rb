@@ -3,6 +3,8 @@ require 'rails_helper'
 describe 'User create post' do
   context 'when logged in' do
     it 'successfully' do
+      puts Rails.env
+      puts ActiveRecord::Base.connection
       user = User.create!(name: 'Maria', email: 'maria@email.com', password: 123456)
 
       login_as user

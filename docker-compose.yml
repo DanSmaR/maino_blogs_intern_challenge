@@ -18,7 +18,7 @@ services:
       timeout: 10s
       retries: 5
     ports:
-      - '5432:5432'
+      - '5431:5432'
     expose:
       - 5432
 
@@ -29,9 +29,10 @@ services:
     env_file:
       - ./.env
     volumes:
+      - ./app:/rails/app
+      - ./spec:/rails/spec
       - app-storage:/rails/storage
-      - uploads:/rails/app/uploads
-      - rubygems:/usr/local/bundle
+      - rubygems_app:/usr/local/bundle
     depends_on:
       db:
         condition: service_healthy
@@ -48,7 +49,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - uploads:/rails/app/uploads
+      - rubygems_worker:/usr/local/bundle
     depends_on:
       redis:
         condition: service_healthy
@@ -69,5 +70,5 @@ services:
 volumes:
   postgres_data: {}
   app-storage: {}
-  rubygems: {}
-  uploads: {}
+  rubygems_app: {}
+  rubygems_worker: {}

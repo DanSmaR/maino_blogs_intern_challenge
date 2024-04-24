@@ -32,13 +32,9 @@ class PostsController < ApplicationController
         return
       end
 
-      file_path = Rails.root.join('app','uploads', uploaded_file.original_filename)
+      file_content = uploaded_file.read
 
-      File.open(file_path, 'wb') do |file|
-        file.write(uploaded_file.read)
-      end
-
-      CreatePostFromFileJob.perform_async(file_path.to_s, current_user.id)
+      CreatePostFromFileJob.perform_async(file_content, current_user.id)
 
       redirect_to root_path, notice: t('.success_job')
 

@@ -26,7 +26,9 @@ FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips postgresql pkg-config
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config
+
+RUN apt-get update && apt-get install -y firefox-esr
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -36,7 +38,6 @@ RUN bundle install && \
 
 # Copy application code
 COPY . .
-
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
@@ -59,7 +60,7 @@ COPY --from=build /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails /rails
+    chown -R rails:rails db log storage tmp app spec
 
 USER rails:rails
 
